@@ -47,7 +47,12 @@ window.addEventListener('DOMContentLoaded', async function(event) {
   // ⬇️ ⬇️ ⬇️
   for (let i=0; i<moviesList.length; i++) {
     let movieId = moviesList[i].id
+    //console.log(movieId)
     let moviePoster = moviesList[i].poster_path
+    //console.log(moviePoster)
+    
+      
+
     
     document.querySelector('.movies').insertAdjacentHTML('beforeend', `
       <div class="movie-${movieId} w-1/5 p-4 ">
@@ -63,7 +68,7 @@ window.addEventListener('DOMContentLoaded', async function(event) {
       document.querySelector(`.movie-${movieId}`).classList.add('opacity-20')
       db.collection('moviesCloud').add({
         ID: movieId,
-        Watched: 'Yes' 
+        MovieWatched: `Yes`
       })
     })
     }
@@ -104,9 +109,9 @@ window.addEventListener('DOMContentLoaded', async function(event) {
     for (let i=0; i<moviesCloud.length; i++) {
       let movieData = moviesCloud[i].data()
       let movieId = movieData.ID
-      let movieWatched = movieData.Watched
-      console.log(movieId)
-      console.log(movieWatched)
+      let movieWatched = movieData.MovieWatched
+      //console.log(movieId)
+      //console.log(movieWatched)
         if (movieWatched = 'Yes') {
           document.querySelector(`.movie-${movieId}`).classList.add('opacity-20')
         }
