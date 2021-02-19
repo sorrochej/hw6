@@ -45,49 +45,6 @@ window.addEventListener('DOMContentLoaded', async function(event) {
   //   <a href="#" class="watched-button block text-center text-white bg-green-500 mt-4 px-4 py-2 rounded">I've watched this!</a>
   // </div>
   // ⬇️ ⬇️ ⬇️
-
-//for (let i=0; i<moviesList.length; i++) {
-  //let movieId = moviesList[i].id
-  //console.log(movieId)
-  //let moviePoster = moviesList[i].poster_path
-  //console.log(moviePoster)
-
-  //document.querySelector('.movies').insertAdjacentHTML('beforeend', `
-    //<div class="movie-${movieId} w-1/5 p-4">
-     //<img src="https://image.tmdb.org/t/p/w500/${moviePoster}" class="w-full">
-     //<a href="#" class="watched-button block text-center text-white bg-green-500 mt-4 px-4 py-2 rounded">I've watched this!</a>
-    //</div>
-   //`)}
-
-   //let querySnapshot = await db.collection('moviesCloud').get()
-   //console.log(querySnapshot.size)
-   
-   //let moviesCloud = querySnapshot.docs
-   //for (let i=0; i<moviesCloud.length; i++) {
-     //let movieData = moviesCloud[i].data()
-     //let movieId = movieData.ID
-     //let movieWatched = movieData.Watched
-     //console.log(movieId)
-     //console.log(movieWatched)
-     //if (movieWatched = 'Yes') {
-      //document.querySelector(`.movie-${movieId}`).classList.add('opacity-20')
-       //}
-   //}
-
-  // ⬆️ ⬆️ ⬆️ 
-  // End Step 2
-
-  // Step 3: 
-  // - Attach an event listener to each "watched button"
-  // - Be sure to prevent the default behavior of the button
-  // - When the "watched button" is clicked, changed the opacity
-  //   of the entire "movie" by using .classList.add('opacity-20')
-  // - When done, refresh the page... does the opacity stick?
-  // - Bonus challenge: add code to "un-watch" the movie by
-  //   using .classList.contains('opacity-20') to check if 
-  //   the movie is watched. Use .classList.remove('opacity-20')
-  //   to remove the class if the element already contains it.
-  // ⬇️ ⬇️ ⬇️
   for (let i=0; i<moviesList.length; i++) {
     let movieId = moviesList[i].id
     let moviePoster = moviesList[i].poster_path
@@ -110,9 +67,50 @@ window.addEventListener('DOMContentLoaded', async function(event) {
       })
     })
     }
+
+
+  // ⬆️ ⬆️ ⬆️ 
+  // End Step 2
+
+  // Step 3: 
+  // - Attach an event listener to each "watched button"
+  // - Be sure to prevent the default behavior of the button
+  // - When the "watched button" is clicked, changed the opacity
+  //   of the entire "movie" by using .classList.add('opacity-20')
+  // - When done, refresh the page... does the opacity stick?
+  // - Bonus challenge: add code to "un-watch" the movie by
+  //   using .classList.contains('opacity-20') to check if 
+  //   the movie is watched. Use .classList.remove('opacity-20')
+  //   to remove the class if the element already contains it.
+  // ⬇️ ⬇️ ⬇️
+  
+    
   // ⬆️ ⬆️ ⬆️ 
   // End Step 3
+  for (let i=0; i<moviesList.length; i++) {
+    let movieId = moviesList[i].id
+    let moviePoster = moviesList[i].poster_path
 
+    document.querySelector('.movies').insertAdjacentHTML('beforeend', `
+    <div class="movie-${movieId} w-1/5 p-4">
+     <img src="https://image.tmdb.org/t/p/w500/${moviePoster}" class="w-full">
+     <a href="#" class="watched-button block text-center text-white bg-green-500 mt-4 px-4 py-2 rounded">I've watched this!</a>
+    </div>
+   `)}
+    
+    let querySnapshot = await db.collection('moviesCloud').get()
+    let moviesCloud = querySnapshot.docs
+    
+    for (let i=0; i<moviesCloud.length; i++) {
+      let movieData = moviesCloud[i].data()
+      let movieId = movieData.ID
+      let movieWatched = movieData.Watched
+      console.log(movieId)
+      console.log(movieWatched)
+        if (movieWatched = 'Yes') {
+          document.querySelector(`.movie-${movieId}`).classList.add('opacity-20')
+        }
+    }
   // Step 4: 
   // - Properly configure Firebase and Firebase Cloud Firestore
   // - Inside your "watched button" event listener, you wrote in
